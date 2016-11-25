@@ -1,0 +1,7 @@
+# general
+*~
+*.log
+tmp
+dump
+metastore_db
+*.DS_Store
