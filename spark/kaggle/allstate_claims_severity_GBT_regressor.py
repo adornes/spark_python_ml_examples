@@ -176,7 +176,7 @@ def process(params):
           .select("id", "prediction")
           .withColumnRenamed("prediction", "loss")
           .coalesce(1)
-          .write().format("csv")
+          .write.format("csv")
           .option("header", "true")
           .save(params.outputFile))
 
