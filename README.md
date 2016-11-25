@@ -70,21 +70,21 @@ Although not so labored in terms of Machine Learning techniques, these scripts p
 
 * Besides using the new **sparkSession.read.csv** method, the reading process also includes important settings: It is set to read the header of the CSV file, which is directly applied to the columns' names of the dataframe created; and **inferSchema** property is set to *true*. Without the **inferSchema** configuration, the float values would be considered as *strings* which would later cause the **VectorAssembler** to raise an ugly error: `pyspark.sql.utils.IllegalArgumentException: u'Data type StringType is not supported.'`. Finally, both raw dataframes are *cached* since they are again used later in the code for *fitting* the **StringIndexer** transformations and it wouldn't be good to read the CSV files from the filesystem or S3 once again. 
 
-Note: While I was translating this code from the [Scala equivalent](https://github.com/adornes/spark_scala_ml_examples), I forgot the `()` for functions that take no parameters. Later in the code, it would cause the error `Mention AttributeError: 'function' object has no attribute`.
+* **Note:** While I was translating this code from the [Scala equivalent](https://github.com/adornes/spark_scala_ml_examples), I forgot the `()` for functions that take no parameters. Later in the code, it would cause the error `Mention AttributeError: 'function' object has no attribute`.
 
-      ```python
-      trainInput = (sparkSession.read
-        .option("header", "true")
-        .option("inferSchema", "true")
-        .csv(params.trainInput)
-        .cache())
+    ```python
+    trainInput = (sparkSession.read
+      .option("header", "true")
+      .option("inferSchema", "true")
+      .csv(params.trainInput)
+      .cache())
 
-      testInput = (sparkSession.read
-        .option("header", "true")
-        .option("inferSchema", "true")
-        .csv(params.testInput)
-        .cache())
-      ```
+    testInput = (sparkSession.read
+      .option("header", "true")
+      .option("inferSchema", "true")
+      .csv(params.testInput)
+      .cache())
+    ```
   
 * The column "loss" is renamed to "label". For some reason, even after using the *setLabelCol* on the regression model, it still looks for a column called "label", raising an ugly error: `pyspark.sql.utils.IllegalArgumentException: u'Field "label" does not exist.'`. It may be hardcoded somewhere in Spark's source code.
  
