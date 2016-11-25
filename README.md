@@ -78,7 +78,7 @@ Note: While I was translating this code from the [Scala equivalent](https://gith
       .option("inferSchema", "true")
       .csv(params.trainInput)
       .cache())
-    
+
     testInput = (sparkSession.read
       .option("header", "true")
       .option("inferSchema", "true")
