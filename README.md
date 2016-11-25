@@ -72,19 +72,19 @@ Although not so labored in terms of Machine Learning techniques, these scripts p
 
 Note: While I was translating this code from the [Scala equivalent](https://github.com/adornes/spark_scala_ml_examples), I forgot the `()` for functions that take no parameters. Later in the code, it would cause the error `Mention AttributeError: 'function' object has no attribute`.
 
-    ```python
-    trainInput = (sparkSession.read
-      .option("header", "true")
-      .option("inferSchema", "true")
-      .csv(params.trainInput)
-      .cache())
+      ```python
+      trainInput = (sparkSession.read
+        .option("header", "true")
+        .option("inferSchema", "true")
+        .csv(params.trainInput)
+        .cache())
 
-    testInput = (sparkSession.read
-      .option("header", "true")
-      .option("inferSchema", "true")
-      .csv(params.testInput)
-      .cache())
-    ```
+      testInput = (sparkSession.read
+        .option("header", "true")
+        .option("inferSchema", "true")
+        .csv(params.testInput)
+        .cache())
+      ```
   
 * The column "loss" is renamed to "label". For some reason, even after using the *setLabelCol* on the regression model, it still looks for a column called "label", raising an ugly error: `pyspark.sql.utils.IllegalArgumentException: u'Field "label" does not exist.'`. It may be hardcoded somewhere in Spark's source code.
  
@@ -191,29 +191,29 @@ Note: While I was translating this code from the [Scala equivalent](https://gith
 
 Assuming you have your local environment all set up with Java 8 or higher, Python and Spark 2.0, you can run the desired script (here, allstate_claims_severity_random_forest_regressor) with the following command structure:
 
-    ```
-    spark-submit allstate_claims_severity_random_forest_regressor.py --s3AccessKey YOUR_AWS_ACCESS_KEY_HERE --s3SecretKey YOUR_AWS_SECRET_KEY_HERE --trainInput "file:///path/to/the/train.csv" --testInput "file:///path/to/the/test.csv" --outputFile  "file:///path/to/any/name/for/submission.csv" --algoNumTrees 3 --algoMaxDepth 3 --algoMaxBins 32 --numFolds 5 --trainSample 0.01 --testSample 0.01
-    ```
+```
+spark-submit allstate_claims_severity_random_forest_regressor.py --s3AccessKey YOUR_AWS_ACCESS_KEY_HERE --s3SecretKey YOUR_AWS_SECRET_KEY_HERE --trainInput "file:///path/to/the/train.csv" --testInput "file:///path/to/the/test.csv" --outputFile  "file:///path/to/any/name/for/submission.csv" --algoNumTrees 3 --algoMaxDepth 3 --algoMaxBins 32 --numFolds 5 --trainSample 0.01 --testSample 0.01
+```
 
 As previously mentioned, [argparse](https://docs.python.org/3/library/argparse.html) is the Python tool that enables the nice names for parameters at command line. If you type something wrong, it will output the sample usage as follows:
 
-    ```
-    usage: allstate_claims_severity_random_forest_regressor.py [-h] --s3AccessKey
-                                                               S3ACCESSKEY
-                                                               --s3SecretKey
-                                                               S3SECRETKEY
-                                                               --trainInput
-                                                               TRAININPUT
-                                                               --testInput
-                                                               TESTINPUT
-                                                               [--outputFile OUTPUTFILE]
-                                                               [--algoNumTrees ALGONUMTREES [ALGONUMTREES ...]]
-                                                               [--algoMaxDepth ALGOMAXDEPTH [ALGOMAXDEPTH ...]]
-                                                               [--algoMaxBins ALGOMAXBINS [ALGOMAXBINS ...]]
-                                                               [--numFolds NUMFOLDS]
-                                                               [--trainSample TRAINSAMPLE]
-                                                               [--testSample TESTSAMPLE]
-    ```
+```
+usage: allstate_claims_severity_random_forest_regressor.py [-h] --s3AccessKey
+                                                           S3ACCESSKEY
+                                                           --s3SecretKey
+                                                           S3SECRETKEY
+                                                           --trainInput
+                                                           TRAININPUT
+                                                           --testInput
+                                                           TESTINPUT
+                                                           [--outputFile OUTPUTFILE]
+                                                           [--algoNumTrees ALGONUMTREES [ALGONUMTREES ...]]
+                                                           [--algoMaxDepth ALGOMAXDEPTH [ALGOMAXDEPTH ...]]
+                                                           [--algoMaxBins ALGOMAXBINS [ALGOMAXBINS ...]]
+                                                           [--numFolds NUMFOLDS]
+                                                           [--trainSample TRAINSAMPLE]
+                                                           [--testSample TESTSAMPLE]
+```
 
 #### Running the Scripts on AWS Elastic MapReduce (EMR)
 
