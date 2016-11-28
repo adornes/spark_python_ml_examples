@@ -1,12 +1,11 @@
 Spark Python Machine Learning Examples
 =====================================
 
-This repository is part of a series on Apache Spark examples, aimed at demonstrating the implementation of Machine Learning solutions in all four different languages supported by Spark. Check the other repositories:
+This repository is part of a series on Apache Spark examples, aimed at demonstrating the implementation of Machine Learning solutions in  different programming languages supported by Spark. Java is the only language not covered, due to its many disadvantages (and not a single advantage) compared to the other languages. Check the other repositories:
 
 * **Scala**  - [github.com/adornes/spark_scala_ml_examples](https://github.com/adornes/spark_scala_ml_examples)
 * **Python** - You are here!
-* **Java**   - To be published soon!
-* **R**      - To be published soon!
+* **R**      - [github.com/adornes/spark_r_ml_examples](https://github.com/adornes/spark_r_ml_examples)
 
 This repository aims at demonstrating how to build a [Spark 2.0](https://spark.apache.org/releases/spark-release-2-0-0.html) application with [Python](http://www.python.org/) for solving Machine Learning problems, ready to be run locally or on any cloud platform such as [AWS Elastic MapReduce (EMR)](https://aws.amazon.com/emr/).
 
@@ -23,7 +22,7 @@ Spark started as a research project at [UC Berkeley](http://www.berkeley.edu/) i
 
 My preferred option for implementing Spark applications (and applications for other purposes as well) is Scala (as you can read [here](https://github.com/adornes/spark_scala_ml_examples)), however it is a common sense that when the subject is Data Science the competition is really narrowed to [Python](https://www.python.org/) vs [R](https://www.r-project.org/). More in-depth comparisons between these two language can be found [here](http://www.kdnuggets.com/2015/05/r-vs-python-data-science.html) and [here](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis#gs.hALDWDM).
 
-[R](https://www.r-project.org/) is the best in terms of libraries for statistical methods, models and graphs. The obvious reason is that it was created (and is maintained) with Statisticians in mind, which also is precisely the same reason why its syntax can look a little bit "unusual" for software engineers. For the same reason, its solid competence goes up to the data analysis output (e.g., reports, slides, output file). There are some libraries for presenting things as an interactive web layer (e.g., [Shiny](https://shiny.rstudio.com/)), but nothing compared to everything available in a general-purpose language such as Python.
+[R](https://www.r-project.org/) is one of the best (or maybe the best) in terms of libraries for statistical methods, models and graphs. The obvious reason is that it was created (and is maintained) with Statisticians in mind, which also is precisely the same reason why its syntax can look a little bit "unusual" for software engineers. For the same reason, its solid competence goes up to the data analysis output (e.g., reports, slides, output file). There are some libraries for presenting things as an interactive web layer (e.g., [Shiny](https://shiny.rstudio.com/)), but nothing compared to everything available in a general-purpose language such as Python.
 
 So, Python brings with it a wide range of libraries and frameworks for almost everything in the scope of Computer Science and Software Engineering. For Data Analysis, Machine Learning and Data Science as a whole, it has conquered an increasing space with awesome libraries (e.g., [ScikitLearn](http://scikit-learn.org/), [matplotlib](http://matplotlib.org/), [seaborn](http://seaborn.pydata.org/), [pandas](http://pandas.pydata.org/), Spark itself) very competitive with those from R. 
 
@@ -102,7 +101,7 @@ Although not so labored in terms of Machine Learning techniques, these scripts p
     testData = testInput.sample(false, params.testSample).cache()
     ```
   
-* By using a custom function *isCateg* the column names are filtered and a [StringIndexer](http://spark.apache.org/docs/latest/ml-features.html#stringindexer) is created for each categorical column, aimed at creating a new numerical column according to the custom function *categNewCol*. Note: It is a weak feature engineering, since it is wrong for a learning model to assume that the categories have an order among them (one is greater or less than the other). Whenever categories are confirmed to be unordered, it is better to use some other technique such as [StringIndexer](http://spark.apache.org/docs/latest/ml-features.html#onehotencoder), which yields a different new column for each category holding a boolean (0/1) value;
+* By using a custom function *isCateg* the column names are filtered and a [StringIndexer](http://spark.apache.org/docs/latest/ml-features.html#stringindexer) is created for each categorical column, aimed at creating a new numerical column according to the custom function *categNewCol*. Note: It is a weak feature engineering, since it is wrong for a learning model to assume that the categories have an order among them (one is greater or less than the other). Whenever categories are confirmed to be unordered, it is better to use some other technique such as [OneHotEncoder](http://spark.apache.org/docs/latest/ml-features.html#onehotencoder), which yields a different new column for each category holding a boolean (0/1) value;
 
     ```python
     isCateg     = lambda c: c.startswith("cat")
